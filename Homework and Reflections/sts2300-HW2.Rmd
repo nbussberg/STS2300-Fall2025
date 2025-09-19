@@ -1,0 +1,111 @@
+---
+title: "Homework 2"
+author: "Put Your Name Here"
+date: 'Due: Friday, September 26'
+output:
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+---
+
+# AI Policy Reminder and Note About New Approaches
+
+Based on the syllabus policy, AI tools (e.g., ChatGPT) can be used on homework for code, but “if you do use such resources, then you must explicitly state where you got the code. For text, “you may not copy AI-generated text verbatim as responses on homework.” Any code or text that is discovered to be AI-generated and not explicitly cited will (a) be treated as a violation of the Elon Honor Code and (b) result in the lowest marking for the associated portion of the project rubric.
+
+As a note, there are multiple ways to accomplish the tasks described in this assignment. If you use methods that we did not discuss in class (e.g., notes, activities, questions during class), you should explain where you learned your method and how it is accomplishing the task. For example, it's possible to subset data using "square bracket" notation. If I did this, I would say how I learned about it and why the code I used successfully subsets the data in the way I want.
+
+---
+
+Use the code chunk below to load any R libraries that you use in your script. I've added `dplyr` as a start.
+
+```{r, message = FALSE}
+library(dplyr)
+```
+
+---
+
+# Part 1 - Math/Stats Majors Data
+
+1. Download the **MTH_STS_Majors.xlsx** file from the Data Files folder on the course Github page. Store it in the same location as this .Rmd file. Add code below to read the data set into R as an object called `majors`. (Note: If you need to load any R packages to do this (e.g., to read in an Excel file), you should put the code to load them up above.)
+
+```{r}
+
+```
+
+<br>
+
+
+2. Convert the data from wide format to long format. The `Year` and `ArtsSciences` columns will remain the same. Your long format data will have two other columns: `Major` and `Count`. Call this new data frame `majors_long`. (Note: You will likely need to load the `tidyr` pacakge. Add this at the top of the document.)
+
+```{r}
+# If you were unable to read in the data in question 1, you can uncomment the
+# line below so that you can still do the remaining questions. Otherwise,
+# delete these comments at the top.
+# 
+# majors <- read.csv("https://raw.githubusercontent.com/nbussberg/STS2300-Fall2025/refs/heads/main/Data/MTH_STS_Majors.csv")
+
+
+```
+
+<br>
+
+
+3. Create a new variable in your `majors_long` data frame called `MajorsPer100` that calculates the number of majors per 100 students in the College of Arts and Sciences. This can be done by taking your `Count` variable and dividing by the `ArtsSciences` variable and then multiplying by 100.
+
+```{r}
+# If you were unable to tranform the data in question 2, you can uncomment the
+# line below so that you can still do the remaining questions. Otherwise,
+# delete these comments at the top.
+# 
+# majors_long <- read.csv("https://raw.githubusercontent.com/nbussberg/STS2300-Fall2025/refs/heads/main/Data/MTH_STS_majors_long.csv")
+
+
+```
+
+<br>
+
+
+4. Write code to get rid of the `ArtsSciences` variable from your `majors_long` data frame. Then print the first 4 and last 4 rows of your new data frame so that they show up in your knitted file.
+
+```{r}
+
+```
+
+<br>
+
+
+5. Write code using the pipe operator that will accomplish questions 1 - 4 all in one step. In other words, you will only use the assignment operator once to go from reading your data in all the way to creating the data frame in Question 4.
+
+- Note 1: You do not need to print the first and last 4 rows as part of this step.
+- Note 2: The code chunk is set to `eval = FALSE`. You should leave this option as `FALSE` for this problem. 
+
+```{r, eval = FALSE}
+
+```
+
+<br>
+
+
+6. In the space below, write a sentence using in-line R code that tells the reader the largest number of Stats majors there have ever been in a year and the average number of Math majors (not applied math) each year. Note: Make sure you don't get an NA in your knitted document - you may need to explore function documentation to learn how to avoid getting an NA result.
+
+**Your sentence(s):**
+
+<br>
+
+
+7. Write code that shows the maximum number of majors per 100 students in the College of Arts and Sciences (`MajorsPer100`) split by the majors (`Major`). Similar to the previous question, you will need to make sure you don't get an NA in your knitted document. Consult the function documentation to learn how to avoid getting an NA result. 
+
+```{r}
+
+```
+
+<br>
+
+
+8. The results from the previous question should show that Math has the largest maximum number of majors per 100 students in the College. Why would it be misleading to say that Math has the most majors? Hint: look at the original `majors` dataset and think about where the maximums occur. 
+
+**Your response:** 
