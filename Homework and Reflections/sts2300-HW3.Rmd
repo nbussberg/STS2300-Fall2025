@@ -1,0 +1,101 @@
+---
+title: "Homework 3"
+author: "Put Your Name Here"
+date: 'Due: Friday, October 3'
+output:
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+---
+
+# AI Policy Reminder and Note About New Approaches
+
+Based on the syllabus policy, AI tools (e.g., ChatGPT) can be used on homework for code, but “if you do use such resources, then you must explicitly state where you got the code. For text, “you may not copy AI-generated text verbatim as responses on homework.” Any code or text that is discovered to be AI-generated and not explicitly cited will (a) be treated as a violation of the Elon Honor Code and (b) result in the lowest marking for the associated portion of the project rubric.
+
+As a note, there are multiple ways to accomplish the tasks described in this assignment. If you use methods that we did not discuss in class (e.g., notes, activities, questions during class), you should explain where you learned your method and how it is accomplishing the task. For example, it's possible to subset data using "square bracket" notation. If I did this, I would say how I learned about it and why the code I used successfully subsets the data in the way I want.
+
+---
+
+Use the code chunk below to load any R libraries that you use in your script. I've added `dplyr` as a start.
+
+```{r, message = FALSE}
+library(dplyr)
+```
+
+---
+
+# Billboard Hot 100
+
+1.  The [following link](https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_number-one_singles_of_the_2020s) includes a table with all of the songs to reach number one on the Billboard Hot 100 list since 2020. I've created an object called `url` below that includes the link. Use the `rvest` package to create a data frame of this data called `billboard`. Once you've done that, uncomment the code to rename the columns.
+
+-   Note 1: You'll need to add the code to load `rvest` at the top of the document with the other packages you're using.
+-   Note 2: Refer to Activity 03A for how to scrape data from websites.
+
+```{r}
+url <- "https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_number-one_singles_of_the_2020s"
+
+
+#colnames(billboard) <- c("Number", "Date", "Artist", "Song", "Weeks", "References", "Empty")
+```
+
+<br>
+
+
+2. Now let's clean up the `billboard` data. Write code that does each of the following:
+
+  - Remove the rows that only list years (2020, 2021, 2022, 2023, 2024, 2025). (Hint: Use `filter()` and the not equals option.)
+  - Subset the data to only include columns for the artist, song name, and weeks at number one.
+  - Convert the `Weeks` variable to numeric (Hint: You can use `mutate()` and a function mentioned in Notes 02 when we talked about how R stores different types of data. There will be a warning because the final song has an asterisk next to its number, so it will be converted to NA. Also, note that R will mistakenly convert numbered superscripts to regular numbers for Weeks, but we aren't going to deal with this variable and thus will ignore it.)
+
+```{r}
+
+```
+
+<br>
+
+
+3. Write code that creates a data frame counting how many number one songs each artist had, then remove all artists with only 1 number one song. Sort the remaining artists in descending order by number of songs and print the resulting data frame to show the results.
+
+```{r}
+
+```
+
+<br>
+
+4.  Let's make a graph of the table you made in the previous question. Start by making a simple bar graph that has purple (you choose the shade) bars outlined in the color black. Don't worry if it does not look perfect; the next question will clean up some of the issues.
+
+```{r}
+
+```
+
+
+5.  The graph you made above has multiple issues.
+
+- A title would be helpful. 
+- On the x-axis, the artist names overlap in some places. 
+- It could be useful to sort the bars from greatest to least. 
+
+You should know how to add the title. You will also need to update the x-axis label after implementing the code for the other two issues. 
+
+For the name overlap, add the following layer to your graph: `theme(axis.text.x = element_text(angle = 90, hjust=1))`. Note: you do not need to edit this line; just add it as a layer to the graph. 
+
+For the sorting, look at the [top response](https://stackoverflow.com/questions/25664007/reorder-bars-in-geom-bar-ggplot2-by-value) at the linked Stack Overflow question to see how the `reorder()` function works or use the help functions to search how to use `reorder()`.
+
+```{r}
+
+```
+
+---
+
+# Reflection
+
+6. Answer one (or both) of the following questions. Your answer should be at least 3 - 4 sentences long and demonstrate some level of reflection (i.e., not just a few words).
+
+  - What's something that has been challenging for you in the class so far. What has made it challenging and how could that challenge be addressed moving forward?
+  - What's something you want to learn how to do with R before the semester is done? Why is this something you're interested in learning?
+  
+**Answer**
