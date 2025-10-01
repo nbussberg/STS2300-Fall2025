@@ -1,0 +1,137 @@
+---
+title: "Homework 4"
+author: "Put Your Name Here"
+date: 'Due: see course timeline for due date'
+output:
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+---
+
+# AI Policy Reminder and Note About New Approaches
+
+Based on the syllabus policy, AI tools (e.g., ChatGPT) can be used on homework for code, but “if you do use such resources, then you must explicitly state where you got the code. For text, “you may not copy AI-generated text verbatim as responses on homework.” Any code or text that is discovered to be AI-generated and not explicitly cited will (a) be treated as a violation of the Elon Honor Code and (b) result in the lowest marking for the associated portion of the project rubric.
+
+As a note, there are multiple ways to accomplish the tasks described in this assignment. If you use methods that we did not discuss in class (e.g., notes, activities, questions during class), you should explain where you learned your method and how it is accomplishing the task. For example, it's possible to subset data using "square bracket" notation. If I did this, I would say how I learned about it and why the code I used successfully subsets the data in the way I want.
+
+---
+
+Use the code chunk below to load any R libraries that you use in your script. I've added `dplyr`, `ggplot2`, and `patchwork` as a start.
+
+```{r, message = FALSE}
+library(dplyr)
+library(ggplot2)
+library(patchwork)
+```
+
+---
+
+# Graphing - European Hedgehogs
+
+A [recent study](https://www.mdpi.com/2076-2615/13/4/626#) looked at lifespans and causes of death of European Hedgehogs. The authors of the paper appear to have created their graphs using `ggplot2`! You will be recreating each of the three graphs in this image and then putting them together into a single image like the authors did. (Want to see [a picture of these cute little guys](https://en.wikipedia.org/wiki/European_hedgehog#/media/File:Erinaceus_europaeus_LC0119.jpg)?)
+
+The graphs can be found at the [following link](https://www.mdpi.com/animals/animals-13-00626/article_deploy/html/images/animals-13-00626-g003.png) (if they don't appear in the RMarkdown document when knitted).
+
+```{r, fig.align = 'center', echo = FALSE, fig.cap = 'Article graphs [Viewable online here](https://www.mdpi.com/animals/animals-13-00626/article_deploy/html/images/animals-13-00626-g003.png)'}
+knitr::include_graphics('https://pub.mdpi-res.com/animals/animals-13-00626/article_deploy/html/images/animals-13-00626-g003.png?1676269713')
+```
+
+The code below will read the author's dataset into R, create a variable telling us whether or not a hedgehog was found as roadkill, and remove hedgehogs with missing information about their sex. 
+
+```{r}
+hedgehogs <- read.csv("https://raw.githubusercontent.com/nbussberg/STS2300-Fall2025/refs/heads/main/Data/hedgehogs.csv") |> 
+  filter(Sex != "Unknown") |> 
+  mutate(TrafficDeath = (Cause == "Roadkill"))
+```
+
+**Important note for the following questions:** In addition to standard homework checks, I will be looking closely at your graphs to see if they closely match the original (i.e., reproducibility). I will note features for which there is flexibility (e.g., the colors in Question 1), but most items I will expect a near exact reproduction of the original. If you have questions, please contact me to discuss further. 
+
+<br>
+
+1. Use the data to create **graph B** (bottom left). Pay attention to each of the following when making your graph:
+
+  - Title, axis, and legend labels (the legend name has a space in it, and the y-axis label is capitalized)
+  - Graph theme (this is a pre-made theme, not one you need to customize)
+  - Bar color and variable it is associated with (it's ok if your colors aren't exactly the same but make them somewhat close)
+  - Note: You do not need to make the female and male labels all lower case (but you are welcome to look into how to do it if you'd like)
+
+```{r}
+
+
+```
+
+
+<br>
+
+
+2. I've written code below to summarize the data for you. Use this summarized data to create **graph A**. Pay attention to each of the following when making your graph:
+
+  - Two geoms are used, one that we use for scatterplots plus a new one (`geom_line()`)
+  - Title, axis, and legend labels
+  - Graph theme (same as the previous question)
+  - You will need to adjust which values show up on the x axis (i.e., all 12 months)
+  - You will need to adjust how far the y-axis goes (Hint: use a similar function from your x-axis change but try the `limits` argument)
+  - Note: It's ok if the points on your graph aren't exactly the same or if a different line is plotted on top of the other than on the original graph. This is related to small changes in how the data was processed.
+  
+```{r}
+hedgehog_sum <- hedgehogs |> 
+  summarize(count = n(), 
+            .by = c(Month, Sex)) |> 
+  add_row(Month = 1:3, 
+          Sex = "Female") |> 
+  complete(Month, Sex) |>  
+  replace_na(list(count = 0)) |> 
+  arrange(Sex, Month)
+
+
+```
+
+
+<br>
+
+
+3. Now let's create **graph C**. I've written code that summarizes the data in a slightly different format to allow you to create this graph. Pay attention to each of the following when making your graph:
+
+  - Title and axis labels
+  - Graph theme (same as before)
+  - The legend was removed (Hint: we saw an example of this in Notes 05)
+  - The two graphs are split over the values of the `TrafficDeath` variable (Hint: see Activity 04 for an example on how to do this)
+  - [This page](https://r-graphics.org/RECIPE-FACET-LABEL-TEXT.html) includes information on how you can change the labels above the two graphs. Note: you may need to first convert the TrafficDeath variable from logical (TRUE/FALSE) to character using the as.character() function. 
+  - Note: Like with the previous graph, it's ok if there are small differences in where points are plotted compared to the original graph.
+  
+```{r}
+hedgehog_sum2 <- hedgehogs |> 
+  summarize(count = n(), 
+            .by = c(Month, Sex, TrafficDeath)) |> 
+  add_row(Month = 1:3, 
+          Sex = "Female", 
+          TrafficDeath = TRUE) |> 
+  complete(Month, Sex, TrafficDeath) |> 
+  replace_na(list(count = 0)) |> 
+  arrange(Sex, Month, TrafficDeath)
+
+
+```
+
+
+<br>
+
+
+4. Lastly, use the `patchwork` library to put all three graphs together like we see in the image above. Congrats, you can make graphs that are used in published scientific research!
+
+```{r}
+
+```
+
+
+---
+
+# Reflection
+
+5. Answer one or both of the following: What's something you're looking forward to doing/trying on the project? What's something you're worried or unsure about doing/trying on the project?
+
+**Answer:**
